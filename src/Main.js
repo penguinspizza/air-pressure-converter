@@ -81,14 +81,14 @@ class Calculator extends React.Component {
           scale="p"
           pressure={psi}
           onPressureChange={this.handlePsiChange} />
-        <div className="Logo">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p className="text-muted">Real-time mutual conversion by React</p>
-        </div>
         <PressureInput
           scale="b"
           pressure={bar}
           onPressureChange={this.handleBarChange} />
+        <div className="Logo">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p className="text-muted">Real-time mutual conversion by React</p>
+        </div>
       </div>
     );
   }
