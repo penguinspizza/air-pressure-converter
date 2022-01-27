@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/air-pressure-converter/static/css/main.be0700e8.css",
-    "main.js": "/air-pressure-converter/static/js/main.8e2b14b1.js",
+    "main.js": "/air-pressure-converter/static/js/main.680f070c.js",
     "static/js/787.ae6f8245.chunk.js": "/air-pressure-converter/static/js/787.ae6f8245.chunk.js",
     "static/media/logo.svg": "/air-pressure-converter/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/air-pressure-converter/index.html",
     "main.be0700e8.css.map": "/air-pressure-converter/static/css/main.be0700e8.css.map",
-    "main.8e2b14b1.js.map": "/air-pressure-converter/static/js/main.8e2b14b1.js.map",
+    "main.680f070c.js.map": "/air-pressure-converter/static/js/main.680f070c.js.map",
     "787.ae6f8245.chunk.js.map": "/air-pressure-converter/static/js/787.ae6f8245.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.be0700e8.css",
-    "static/js/main.8e2b14b1.js"
+    "static/js/main.680f070c.js"
   ]
 }
