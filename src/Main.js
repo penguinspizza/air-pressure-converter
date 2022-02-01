@@ -1,7 +1,7 @@
 // 参考資料
 // https://ja.reactjs.org/docs/lifting-state-up.html
 
-import React from "react"; // Reactのインポート
+import React, { useState } from "react"; // Reactのインポート
 import logo from './logo.svg';
 import './Main.css';
 
@@ -30,68 +30,54 @@ function tryConvert(pressure, convert) { // 引数に圧力値、変換関数を
   return rounded.toString(); // 文字列に変換して返す
 }
 
-class PressureInput extends React.Component { // 入力フィールドをレンダリングするクラス
-  constructor(props) {
-    super(props); // React.Componentを呼び出してコンストラクタで色々させる
-    this.handleChange = this.handleChange.bind(this); // メソッドのバインド
-    this.state = { pressure: '' }; // this.state.pressureで値を使用できるステートを宣言
+function PressureInput(props) {
+  const handleChange = (e) => {
+    props.onPressureChange(e.target.value);
   }
 
-  handleChange(e) {
-    this.props.onPressureChange(e.target.value); // 親コンポーネントに値を与えて呼び出す
-  }
+  const pressure = props.pressure;
+  const scale = props.scale;
 
-  render() {
-    const pressure = this.props.pressure;
-    const scale = this.props.scale;
-    return (
-      <div className="input-group mt-3 mb-3">
-        <input type="number" className="form-control" value={pressure} onChange={this.handleChange} />
-        <span className="input-group-text">{scaleNames[scale]}</span>
-      </div>
-    );
-  }
+  return (
+    <div className="input-group mt-3 mb-3">
+      <input type="number" className="form-control" value={pressure} onChange={handleChange} />
+      <span className="input-group-text">{scaleNames[scale]}</span>
+    </div>
+  );
 }
 
-class Calculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handlePsiChange = this.handlePsiChange.bind(this);
-    this.handleBarChange = this.handleBarChange.bind(this);
-    this.state = { pressure: '', scale: 'p' };
+function Calculator(props) {
+  const [state, setState] = useState({ pressure: '', scale: 'p' });
+
+  const handlePsiChange = (pressure) => {
+    setState({ scale: 'p', pressure: pressure });
   }
 
-  handlePsiChange(pressure) {
-    this.setState({ scale: 'p', pressure });
+  const handleBarChange = (pressure) => {
+    setState({ scale: 'b', pressure: pressure });
   }
 
-  handleBarChange(pressure) {
-    this.setState({ scale: 'b', pressure });
-  }
+  const scale = state.scale;
+  const pressure = state.pressure;
+  const psi = scale === 'b' ? tryConvert(pressure, toPsi) : pressure;
+  const bar = scale === 'p' ? tryConvert(pressure, toBar) : pressure;
 
-  render() {
-    const scale = this.state.scale;
-    const pressure = this.state.pressure;
-    const psi = scale === 'b' ? tryConvert(pressure, toPsi) : pressure;
-    const bar = scale === 'p' ? tryConvert(pressure, toBar) : pressure;
-
-    return (
-      <div>
-        <PressureInput
-          scale="p"
-          pressure={psi}
-          onPressureChange={this.handlePsiChange} />
-        <PressureInput
-          scale="b"
-          pressure={bar}
-          onPressureChange={this.handleBarChange} />
-        <div className="Logo">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p className="text-muted">Real-time mutual conversion by React</p>
-        </div>
+  return (
+    <div>
+      <PressureInput
+        scale="p"
+        pressure={psi}
+        onPressureChange={handlePsiChange} />
+      <PressureInput
+        scale="b"
+        pressure={bar}
+        onPressureChange={handleBarChange} />
+      <div className="Logo">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p className="text-muted">Real-time mutual conversion by React</p>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Calculator;
