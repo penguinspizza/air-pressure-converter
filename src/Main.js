@@ -1,7 +1,7 @@
 // 参考資料
 // https://ja.reactjs.org/docs/lifting-state-up.html
 
-import React, { useState } from "react"; // Reactのインポート
+import { useState } from "react"; // Reactのインポート
 import logo from './logo.svg';
 import './Main.css';
 
@@ -46,7 +46,7 @@ function PressureInput(props) {
   );
 }
 
-function Calculator(props) {
+function Calculator() {
   const [state, setState] = useState({ pressure: '', scale: 'p' });
 
   const handlePsiChange = (pressure) => {
